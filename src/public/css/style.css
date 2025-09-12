@@ -1,0 +1,58 @@
+#app {
+  background-color: black;
+  color: antiquewhite;
+}
+:root {
+  background-color: black;
+  color: antiquewhite;
+}
+#imgContainer {
+  display: block;
+  position: relative;
+  left: 10%;
+  height: 70%;
+  width: 80%;
+  /*border: 1px solid grey;*/
+}
+
+#imgContainer img {
+  /*border: 1px solid lightgrey;*/
+  object-fit:contain;
+  vertical-align: middle;
+
+  width: 100%;
+  height: 100%; 
+  margin:auto;/* x,y center if inside a grid or flex box */
+ 
+  
+  display: flex;
+}
+
+#imgListContainer {
+  height: 10%;
+  width: auto;
+  padding: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /*border: 1px solid grey;*/
+  background-color: darkslategrey;
+  overflow: hidden;
+  display: block;
+}
+
+.imgListContainer {
+  /*border: 1px solid grey;*/
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  display: inline-block;
+}
+
+.imgListContainer img{
+  /*border: 1px solid grey;*/
+  width: 100%;
+  height: 100%;
+  object-fit:scale-down;
+}
+.selectedImgContainer {
+  border: 2px solid grey;
+}
