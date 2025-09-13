@@ -1,14 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
-//import useSSE from './useSSE';
 
-//import { useCallback } from "react";
-
-//import { useCallback } from "react";
-
-//useSSE = require('./useSSE')
 const app = document.getElementById('app');
 const Body = () => {
-  // eslint-disable-next-line no-undef
   const [imglist, setimglist] = React.useState([]);
   const [imgCursor, setimgCursor] = React.useState(3);
   const [error, setError] = React.useState(0);
@@ -84,7 +78,7 @@ const Body = () => {
       <div>
         <NavContainer handlePrevImg={handlePrevImg} handleNextImg={handleNextImg} handleLog={handleLog} />
         <ImgContainer imglist={imglist} imgCursor={imgCursor} error={error} />
-        <ImgListContainer imglist={imglist} imgCursor={imgCursor} />
+        <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} />
         <LogContainer imglist={imglist} imgCursor={imgCursor} error={error} />
       </div>
     );
@@ -107,21 +101,48 @@ const ImgContainer = ({ imglist, imgCursor }) => {
     </div>
   );
 };
-const ImgListContainer = ({ imglist, imgCursor }) => {
-  console.log("minimg",imglist)
-    return (
+const ThumbnailListContainer = ({ imglist, imgCursor }) => {
+  console.log('minimg', imglist);
+  return (
     <div>
-      <div id="imgListContainer">
-        {imglist.toReversed().map((minimg,idx) => (
-          <MiniImgContainer url={minimg.url} classes={imglist.length-imgCursor-1==idx?"imgListContainer selectedImgContainer":"imgListContainer"}/>
+      <div id="thumbnailListContainer">
+        {imglist.toReversed().map((minimg, idx) => (
+          <ThumbnailContainer
+            key={idx}
+            url={minimg.url}
+            classes={imglist.length - imgCursor - 1 == idx ? 'thumbnailContainer selectedThumbnailContainer' : 'thumbnailContainer'}
+          />
+        ))}
+      </div>
+      <div id="thumbnailListContainer2">
+        {imglist.toReversed().map((minimg, idx) => (
+          <ThumbnailContainer2
+            key={idx}
+            url={minimg.url}
+            classes={imglist.length - imgCursor - 1 == idx ? 'thumbnailContainer2 selectedThumbnailContainer' : 'thumbnailContainer2'}
+            offset={idx + imgCursor - imglist.length + 1}
+          />
         ))}
       </div>
     </div>
   );
 };
-const MiniImgContainer = ({ url, classes}) => {
+const ThumbnailContainer = ({ url, classes }) => {
   return (
     <div className={classes}>
+      <img src={url}></img>
+    </div>
+  );
+};
+const ThumbnailContainer2 = ({ url, classes, offset }) => {
+  /*-: '
+  const leftval = 150 * offset;
+  const leftstr = leftval + 'px';
+  const style = { left: leftstr };
+  */
+  const style = { '--offset': offset };
+  return (
+    <div className={classes} style={style}>
       <img src={url}></img>
     </div>
   );
@@ -137,21 +158,7 @@ const LogContainer = ({ imglist, imgCursor, error }) => {
     </div>
   );
 };
-/*
-const LogContainer = (props) => {
-  console.log('Logcontainer/imglist:', props.imglist);
-  console.log('Logcontainer/imgCursor:', props.imgCursor);
-  return (
-    <div id="logContainer">
-      <h4>
-        {props.imglist.length - props.imgCursor}/{props.imglist.length}:{props.imglist[props.imgCursor].id}
-        <br />
-        {props.error}
-      </h4>
-    </div>
-  );
-};
-*/
+
 const HomePage = () => {
   return (
     <div>

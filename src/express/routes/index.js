@@ -3,7 +3,6 @@ import express from 'express';
 //import UserRoutes from './user.js';
 
 const router = express.Router();
-console.log("toto")
 router.get('/', (req, res) => {
   res.render('index', { title: 'Express' });
 });

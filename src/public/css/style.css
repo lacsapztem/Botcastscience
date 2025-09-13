@@ -5,6 +5,9 @@
 :root {
   background-color: black;
   color: antiquewhite;
+  --thumbnail-size: 150px;
+  --thumbnail-margin:25px;
+  --middle-screen: 50%;
 }
 #imgContainer {
   display: block;
@@ -28,7 +31,19 @@
   display: flex;
 }
 
-#imgListContainer {
+#thumbnailListContainer2 {
+  height: 10%;
+  width: auto;
+  padding: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /*border: 1px solid grey;*/
+  /*background-color: darkslategrey;*/
+  overflow: auto;
+  display: block;
+}
+
+#thumbnailListContainer {
   height: 10%;
   width: auto;
   padding: 3px;
@@ -36,23 +51,51 @@
   margin-bottom: 10px;
   /*border: 1px solid grey;*/
   background-color: darkslategrey;
-  overflow: hidden;
-  display: block;
+  overflow:auto;
+  display: none;
 }
 
-.imgListContainer {
+.thumbnailContainer {
   /*border: 1px solid grey;*/
   height: 100%;
   aspect-ratio: 1 / 1;
   display: inline-block;
 }
+.thumbnailContainer2 {
+  /*border: 1px solid grey;*/
+  --total-width: calc(var(--thumbnail-size) + var(--thumbnail-margin) * 2 );
+  height: var(--total-width);
+  width: var(--total-width);
+  aspect-ratio: 1 / 1;
+  position: fixed;
+  top:75%;
+  display: block;
+  overflow: hidden;
+  /*padding:25px;*/
+  object-fit:scale-down;
+  left: calc(var(--offset) * var(--total-width) + 50% - var(--total-width) / 2);
+}
 
-.imgListContainer img{
+.thumbnailContainer img{
   /*border: 1px solid grey;*/
   width: 100%;
   height: 100%;
   object-fit:scale-down;
 }
-.selectedImgContainer {
-  border: 2px solid grey;
+
+.thumbnailContainer2 img{
+  /*border: 1px solid grey;*/
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  object-fit:scale-down;
+}
+.selectedThumbnailContainer {
+  border: 2px solid red;
+  /*padding: 0px;
+  /*left: calc((var(--offset)*var(--thumbnail-size))+50vw);*/
+}
+.selectedThumbnailContainer img{
+  padding: 0;
+  margin: 0;
 }
