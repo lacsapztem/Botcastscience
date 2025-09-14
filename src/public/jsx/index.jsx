@@ -28,7 +28,7 @@ const Body = () => {
   React.useEffect(() => {
     document.addEventListener('keydown', keyDownHandler);
     return () => {
-      //usEeffect retourne une fonction qui sera appelée lors de la destruction du composant
+      //useEffect retourne une fonction qui sera appelée lors de la destruction du composant
       document.removeEventListener('keydown', keyDownHandler);
     };
   }, [imgCursor, imglist]);
@@ -73,24 +73,28 @@ const Body = () => {
     console.log("pas d'image");
     return <h4>Rien à afficher</h4>;
   } else {
-    console.log('cursor', imgCursor);
     return (
       <div>
-        <NavContainer handlePrevImg={handlePrevImg} handleNextImg={handleNextImg} handleLog={handleLog} />
+        <HeaderContainer />
         <ImgContainer imglist={imglist} imgCursor={imgCursor} error={error} />
         <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} />
-        <LogContainer imglist={imglist} imgCursor={imgCursor} error={error} />
+        <FooterContainer
+          imglist={imglist}
+          imgCursor={imgCursor}
+          error={error}
+          handlePrevImg={handlePrevImg}
+          handleNextImg={handleNextImg}
+          handleLog={handleLog}
+        />
       </div>
     );
   }
 };
 
-const NavContainer = ({ handlePrevImg, handleNextImg, handleLog }) => {
+const HeaderContainer = () => {
   return (
-    <div id="navContainer">
-      <button onClick={handlePrevImg}>Previous</button>
-      <button onClick={handleNextImg}>Next</button>
-      <button onClick={handleLog}>log</button>
+    <div id="headerContainer">
+      <h1>Bot&apos;Cast Science</h1>
     </div>
   );
 };
@@ -102,7 +106,6 @@ const ImgContainer = ({ imglist, imgCursor }) => {
   );
 };
 const ThumbnailListContainer = ({ imglist, imgCursor }) => {
-  console.log('minimg', imglist);
   return (
     <div>
       <div id="thumbnailListContainer">
@@ -126,18 +129,26 @@ const ThumbnailContainer = ({ url, classes, offset }) => {
     </div>
   );
 };
-const LogContainer = ({ imglist, imgCursor, error }) => {
+const FooterContainer = ({ imglist, imgCursor, error, handlePrevImg, handleNextImg, handleLog }) => {
   return (
-    <div id="logContainer">
+    <div id="footerContainer">
       <h4>
-        {imglist.length - imgCursor}/{imglist.length}:{imglist[imgCursor].id}
-        <br />
-        {error}
+        {imglist.length - imgCursor}/{imglist.length}:{imglist[imgCursor].id} - {error}
       </h4>
+      <LogContainer handlePrevImg={handlePrevImg} handleNextImg={handleNextImg} handleLog={handleLog} />
     </div>
   );
 };
 
+const LogContainer = ({ handlePrevImg, handleNextImg, handleLog }) => {
+  return (
+    <div id="logContainer">
+      <button onClick={handlePrevImg}>Previous</button>
+      <button onClick={handleNextImg}>Next</button>
+      <button onClick={handleLog}>log</button>
+    </div>
+  );
+};
 const HomePage = () => {
   return (
     <div>

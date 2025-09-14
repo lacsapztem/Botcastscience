@@ -1,77 +1,98 @@
+
+.theme {
+  background-color: #101010;
+  color: #303030;
+  --middle-screen: 50vw;
+  --spacer-height: 2vh;
+  --imgContainer-bgcolor:#151515;
+  --imgContainer-width:90vw;
+  --imgContainer-height:70vh;
+  --header-height:5vh;
+  --thumbnail-size: 10vh;
+  --thumbnail-margin:2vh;
+}
+
 #app {
-  background-color: black;
-  color: antiquewhite;
 }
-:root {
-  background-color: black;
-  color: antiquewhite;
-  --thumbnail-size: 150px;
-  --thumbnail-margin:25px;
-  --middle-screen: 50%;
+#headerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--header-height);
+  width: 100%;
 }
+
+#headerContainer h1{
+  padding-left: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3vh;
+
+}
+
+#footerContainer {
+  position: absolute;
+  top: calc(100% - var(--header-height));
+  left: 0;
+  height: var(--header-height);
+  width: 100%;
+}
+
 #imgContainer {
+  --lateral-padding: calc(var(--middle-screen) - var(--imgContainer-width) / 2);
   display: block;
-  position: relative;
-  left: 10%;
-  height: 70%;
-  width: 80%;
-  /*border: 1px solid grey;*/
+  position: absolute;
+  top: calc(var(--header-height) + var(--spacer-height));
+  height: var(--imgContainer-height);
+  width: var(--imgContainer-width);
+  padding-left: var(--lateral-padding);
+  padding-right: var(--lateral-padding);
+  padding-top: calc(var(--spacer-height) / 2);
+  padding-bottom: calc(var(--spacer-height) / 2);
+  background-color: var(--imgContainer-bgcolor);
 }
 
 #imgContainer img {
-  /*border: 1px solid lightgrey;*/
   object-fit:contain;
   vertical-align: middle;
-
   width: 100%;
   height: 100%; 
   margin:auto;/* x,y center if inside a grid or flex box */
- 
-  
   display: flex;
 }
 
 #thumbnailListContainer {
-  height: 10%;
   width: auto;
-  padding: 3px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  /*border: 1px solid grey;*/
-  /*background-color: darkslategrey;*/
   overflow: auto;
   display: block;
 }
 
 
 .thumbnailContainer {
-  /*border: 1px solid grey;*/
   --total-width: calc(var(--thumbnail-size) + var(--thumbnail-margin) * 2 );
   height: var(--total-width);
   width: var(--total-width);
   aspect-ratio: 1 / 1;
   position: fixed;
-  top:75%;
+  top:calc(var(--header-height) + var(--imgContainer-height) + 2 * var(--spacer-height));
   display: block;
   overflow: hidden;
-  /*padding:25px;*/
   object-fit:scale-down;
   left: calc(var(--offset) * var(--total-width) + 50% - var(--total-width) / 2);
 }
 
 .thumbnailContainer img{
-  /*border: 1px solid grey;*/
-  width: 100%;
-  height: 100%;
-  padding: 50px;
+  width: var(--thumbnail-size);
+  height: var(--thumbnail-size);
+  margin: var(--thumbnail-margin);
   object-fit:scale-down;
 }
 .selectedThumbnailContainer {
-  border: 2px solid red;
-  /*padding: 0px;
-  /*left: calc((var(--offset)*var(--thumbnail-size))+50vw);*/
+  background-color: var(--imgContainer-bgcolor);
 }
 .selectedThumbnailContainer img{
+  display: none;
   padding: 0;
+  width: var(--total-width);
+  height: var(--total-width);
   margin: 0;
 }
