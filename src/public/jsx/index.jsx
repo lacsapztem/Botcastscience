@@ -111,15 +111,6 @@ const ThumbnailListContainer = ({ imglist, imgCursor }) => {
             key={idx}
             url={minimg.url}
             classes={imglist.length - imgCursor - 1 == idx ? 'thumbnailContainer selectedThumbnailContainer' : 'thumbnailContainer'}
-          />
-        ))}
-      </div>
-      <div id="thumbnailListContainer2">
-        {imglist.toReversed().map((minimg, idx) => (
-          <ThumbnailContainer2
-            key={idx}
-            url={minimg.url}
-            classes={imglist.length - imgCursor - 1 == idx ? 'thumbnailContainer2 selectedThumbnailContainer' : 'thumbnailContainer2'}
             offset={idx + imgCursor - imglist.length + 1}
           />
         ))}
@@ -127,19 +118,7 @@ const ThumbnailListContainer = ({ imglist, imgCursor }) => {
     </div>
   );
 };
-const ThumbnailContainer = ({ url, classes }) => {
-  return (
-    <div className={classes}>
-      <img src={url}></img>
-    </div>
-  );
-};
-const ThumbnailContainer2 = ({ url, classes, offset }) => {
-  /*-: '
-  const leftval = 150 * offset;
-  const leftstr = leftval + 'px';
-  const style = { left: leftstr };
-  */
+const ThumbnailContainer = ({ url, classes, offset }) => {
   const style = { '--offset': offset };
   return (
     <div className={classes} style={style}>
