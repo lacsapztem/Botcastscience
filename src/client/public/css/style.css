@@ -1,0 +1,98 @@
+
+.theme {
+  background-color: #101010;
+  color: #303030;
+  --middle-screen: 50vw;
+  --spacer-height: 2vh;
+  --imgContainer-bgcolor:#151515;
+  --imgContainer-width:90vw;
+  --imgContainer-height:70vh;
+  --header-height:5vh;
+  --thumbnail-size: 10vh;
+  --thumbnail-margin:2vh;
+}
+
+#app {
+}
+#headerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--header-height);
+  width: 100%;
+}
+
+#headerContainer h1{
+  padding-left: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3vh;
+
+}
+
+#footerContainer {
+  position: absolute;
+  top: calc(100% - var(--header-height));
+  left: 0;
+  height: var(--header-height);
+  width: 100%;
+}
+
+#imgContainer {
+  --lateral-padding: calc(var(--middle-screen) - var(--imgContainer-width) / 2);
+  display: block;
+  position: absolute;
+  top: calc(var(--header-height) + var(--spacer-height));
+  height: var(--imgContainer-height);
+  width: var(--imgContainer-width);
+  padding-left: var(--lateral-padding);
+  padding-right: var(--lateral-padding);
+  padding-top: calc(var(--spacer-height) / 2);
+  padding-bottom: calc(var(--spacer-height) / 2);
+  background-color: var(--imgContainer-bgcolor);
+}
+
+#imgContainer img {
+  object-fit:contain;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%; 
+  margin:auto;/* x,y center if inside a grid or flex box */
+  display: flex;
+}
+
+#thumbnailListContainer {
+  width: auto;
+  overflow: auto;
+  display: block;
+}
+
+
+.thumbnailContainer {
+  --total-width: calc(var(--thumbnail-size) + var(--thumbnail-margin) * 2 );
+  height: var(--total-width);
+  width: var(--total-width);
+  aspect-ratio: 1 / 1;
+  position: fixed;
+  top:calc(var(--header-height) + var(--imgContainer-height) + 2 * var(--spacer-height));
+  display: block;
+  overflow: hidden;
+  object-fit:scale-down;
+  left: calc(var(--offset) * var(--total-width) + 50% - var(--total-width) / 2);
+}
+
+.thumbnailContainer img{
+  width: var(--thumbnail-size);
+  height: var(--thumbnail-size);
+  margin: var(--thumbnail-margin);
+  object-fit:scale-down;
+}
+.selectedThumbnailContainer {
+  background-color: var(--imgContainer-bgcolor);
+}
+.selectedThumbnailContainer img{
+  display: none;
+  padding: 0;
+  width: var(--total-width);
+  height: var(--total-width);
+  margin: 0;
+}
