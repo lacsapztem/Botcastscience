@@ -1,6 +1,7 @@
 node_modules/
 build/
 coverage/
+dist/*
 
 logs
 *.log
@@ -16,3 +17,5 @@ yarn-error.log*
 .env.local
 
 .DS_Store
+
+temp

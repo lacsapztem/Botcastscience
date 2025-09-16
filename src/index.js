@@ -10,6 +10,7 @@ import path from 'path';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+
 const PORT = process.env.PORT ?? 8000;
 const DISCORD_CHANNEL = process.env.DISCORD_CHANNEL;
 const __filename = fileURLToPath(import.meta.url);
@@ -24,16 +25,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//import  webpack from 'webpack';
-//import config from '../webpack.config.js';
-//const compiler = webpack(config);
-//
-//import webpackDevMiddleware from 'webpack-dev-middleware';
-//
-//app.use(webpackDevMiddleware(compiler, {
-//  publicPath: config.output.publicPath,
-//})
-//)
+import webpack from 'webpack';
+import config from '../webpack.client.config.js';
+const compiler = webpack(config);
+
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+
+app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }));
+app.use(webpackHotMiddleware(compiler));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
