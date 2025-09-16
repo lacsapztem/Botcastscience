@@ -23,7 +23,7 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 import webpack from 'webpack';
 import config from '../webpack.client.config.js';
@@ -35,7 +35,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'client/views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {

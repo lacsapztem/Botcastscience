@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const config = {
-  entry: './src/components/index.jsx',
+  entry: './src/client/components/index.jsx',
   output: {
     filename: 'bundle.js',
     publicPath: '/',
