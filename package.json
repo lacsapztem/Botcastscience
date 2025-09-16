@@ -23,6 +23,7 @@
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
     "cors": "2.8.5",
+    "cross-env": "7.0.3",
     "discord.js": "^14.22.1",
     "dotenv": "16.5.0",
     "express": "^5.1.0",
