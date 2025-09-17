@@ -10,16 +10,17 @@
   --header-height:5vh;
   --thumbnail-size: 10vh;
   --thumbnail-margin:2vh;
+  --navbar-width: 5vw;
+  user-select: none;
+  overflow: hidden;
 }
 
-#app {
-}
 #headerContainer {
   position: absolute;
   top: 0;
   left: 0;
   height: var(--header-height);
-  width: 100%;
+  width: 100wv;
 }
 
 #headerContainer h1{
@@ -31,10 +32,11 @@
 
 #footerContainer {
   position: absolute;
-  top: calc(100% - var(--header-height));
+  top: calc(100vh - var(--header-height));
   left: 0;
   height: var(--header-height);
-  width: 100%;
+  width: 100vw;
+  overflow: hidden;
 }
 
 #imgContainer {
@@ -95,4 +97,36 @@
   width: var(--total-width);
   height: var(--total-width);
   margin: 0;
+}
+
+.NavBar {
+  height: 100vh;
+  width: 5vw;
+  top:0;
+  line-height: 100%;
+  background-color: white;
+  color: black;
+  opacity: 0.2;
+  position: absolute;
+  text-align: center;
+  font-size: 5vw;
+  align-content: center;
+
+}
+#PrevNavBar {
+  left: calc(1px - 5vw);
+}
+#PrevNavBar:hover {
+  left: 0;
+}
+#NextNavBar {
+  left: calc(100vw - 2px);
+}
+#NextNavBar:hover {
+  left: calc(100vw - 5vw);
+}
+
+.NavBar span{
+  display: inline-block;
+  user-select: none;
 }

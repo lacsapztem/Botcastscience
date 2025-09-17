@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 import Body from './Body.jsx';
+import { PrevNavBar, NextNavBar } from './NavBar.jsx';
 
 const app = document.getElementById('app');
 const App = () => {
@@ -78,6 +79,16 @@ const App = () => {
       <div>
         <HeaderContainer />
         <Body imglist={imglist} imgCursor={imgCursor} />
+        <PrevNavBar
+          eventcb={() => {
+            handlePrevImg();
+          }}
+        />
+        <NextNavBar
+          eventcb={() => {
+            handleNextImg();
+          }}
+        />
         <FooterContainer
           imglist={imglist}
           imgCursor={imgCursor}
