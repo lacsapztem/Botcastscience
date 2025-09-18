@@ -25,9 +25,13 @@ const getImageAttachment = (message) => {
 };
 
 const parseMessageList = (messages) => {
-  console.log(`Received ${messages.size} messages`);
+  const tab = [];
   //Iterate through the messages here with the variable "messages".
-  messages.forEach(getImageAttachment);
+  messages.forEach((m) => {
+    tab.push(m);
+  });
+  tab.toReversed().forEach(getImageAttachment);
+  console.log(`Received ${messages.size} messages`, tab);
   console.log(`found ${ImageList.length} file(s)`);
 };
 
@@ -38,7 +42,7 @@ const initChannel = (channel) => {
   channel.messages.fetch({ limit: 100 }).then(parseMessageList);
   const collector = channel.createMessageCollector({ filterAttachementMsg, Max: 1 });
   collector.on('collect', getImageAttachment);
-  collector.on('end', (collected) => console.log(`End of message collector`, collected));
+  collector.on('end', (collected) => console.log(`End of initial message collector`, collected));
 };
 
 const launchImageScanner = (ChannelId) => {

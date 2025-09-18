@@ -24,7 +24,7 @@ const App = () => {
         handleLog();
       }
     },
-    [imgCursor, imglist],
+    [imgCursor],
   );
 
   React.useEffect(() => {
@@ -33,7 +33,16 @@ const App = () => {
       //useEffect retourne une fonction qui sera appelée lors de la destruction du composant
       document.removeEventListener('keydown', keyDownHandler);
     };
-  }, [imgCursor, imglist]);
+  }, [imgCursor]);
+
+  React.useEffect(() => {
+ //   console.log('Modif de la liste ', imglist);
+    setimgCursor(Math.max(0, imglist.length - 1));
+  }, [imglist]);
+
+//  React.useEffect(() => {
+//    console.log('Modif du Curseur', imgCursor);
+//  }, [imgCursor]);
 
   React.useEffect(() => {
     const eventSource = new EventSource(url);
@@ -42,7 +51,6 @@ const App = () => {
     eventSource.onmessage = (event) => {
       const newData = JSON.parse(event.data);
       setimglist(newData);
-      setimgCursor(0);
     };
 
     // Handle errors
@@ -57,26 +65,28 @@ const App = () => {
 
   const handleNextImg = React.useCallback(() => {
     // imglist est indexé à l'envers
-    const new_val = Math.max(imgCursor - 1, 0);
-    setimgCursor(new_val);
-  }, [imgCursor, imglist]);
-
-  const handlePrevImg = React.useCallback(() => {
-    // imglist est indexé à l'envers
     const new_val = Math.min(imgCursor + 1, imglist.length - 1);
     setimgCursor(new_val);
-  }, [imgCursor, imglist]);
+    console.log(imgCursor);
+  }, [imgCursor]);
+
+  const handlePrevImg = React.useCallback(() => {
+    // imglist est indexé à l'envers()
+    const new_val = Math.max(imgCursor - 1, 0);
+    setimgCursor(new_val);
+    console.log(imgCursor);
+  }, [imgCursor]);
 
   const handleLog = React.useCallback(() => {
     console.log('LogOnDemand: imglist', imglist);
-  }, [imgCursor, imglist]);
+  }, [imgCursor]);
 
   if (imglist.length == 0) {
     console.log("pas d'image");
     return <h4>Rien à afficher</h4>;
   } else {
     return (
-      <div>
+      <div id>
         <HeaderContainer />
         <Body imglist={imglist} imgCursor={imgCursor} />
         <PrevNavBar
@@ -130,13 +140,6 @@ const LogContainer = ({ handlePrevImg, handleNextImg, handleLog }) => {
     </div>
   );
 };
-const HomePage = () => {
-  return (
-    <div>
-      <App />
-    </div>
-  );
-};
 
 const root = ReactDOM.createRoot(app);
-root.render(<HomePage />);
+root.render(<App />);

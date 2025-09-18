@@ -3,7 +3,6 @@ import botcastscience from './discordInterface/botcastscience.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-botcastscience.launchImageScanner('397711811778052099');
 
 import path from 'path';
 //import routes from './routes/index.js';

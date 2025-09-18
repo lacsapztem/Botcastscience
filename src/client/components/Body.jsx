@@ -21,12 +21,12 @@ const ThumbnailListContainer = ({ imglist, imgCursor }) => {
   return (
     <div>
       <div id="thumbnailListContainer">
-        {imglist.toReversed().map((minimg, idx) => (
+        {imglist.map((minimg, idx) => (
           <ThumbnailContainer
             key={idx}
             url={minimg.url}
-            classes={imglist.length - imgCursor - 1 == idx ? 'thumbnailContainer selectedThumbnailContainer' : 'thumbnailContainer'}
-            offset={idx + imgCursor - imglist.length + 1}
+            classes={imgCursor == idx ? 'thumbnailContainer selectedThumbnailContainer' : 'thumbnailContainer'}
+            offset={idx-imgCursor}
           />
         ))}
       </div>

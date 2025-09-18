@@ -4,13 +4,16 @@
   color: #303030;
   --middle-screen: 50vw;
   --spacer-height: 2vh;
-  --imgContainer-bgcolor:#151515;
+  --imgContainer-bgcolor:#202020;
   --imgContainer-width:90vw;
   --imgContainer-height:70vh;
   --header-height:5vh;
   --thumbnail-size: 10vh;
   --thumbnail-margin:2vh;
   --navbar-width: 5vw;
+}
+
+.config{
   user-select: none;
   overflow: hidden;
 }
@@ -92,7 +95,8 @@
   background-color: var(--imgContainer-bgcolor);
 }
 .selectedThumbnailContainer img{
-  display: none;
+  display: fixed;
+  opacity: 20%;
   padding: 0;
   width: var(--total-width);
   height: var(--total-width);
