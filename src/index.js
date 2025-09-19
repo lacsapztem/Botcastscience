@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config();
-botcastscience.launchImageScanner(DISCORD_CHANNEL);
+botcastscience.startBot(DISCORD_CHANNEL);
 const app = express();
 
 app.use(cors());
@@ -37,13 +37,9 @@ app.use(webpackHotMiddleware(compiler));
 app.set('views', path.join(__dirname, 'client/views'));
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('index', botcastscience.getImageList());
-});
 
-app.get('/imglist', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify(botcastscience.getImageList()));
+app.get('/', (req, res) => {
+  res.render('index', botcastscience.imageHarvester.getImageList());
 });
 
 app.get('/events', (req, res) => {
@@ -53,10 +49,10 @@ app.get('/events', (req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
 
-  res.write(`data: ${JSON.stringify(botcastscience.getImageList())}\n\n`);
+  res.write(`data: ${JSON.stringify(botcastscience.imageHarvester.getImageList())}\n\n`);
   // Send a message every 5 seconds for demonstration purposes
-  botcastscience.registerNewImageCallback(() => {
-    res.write(`data: ${JSON.stringify(botcastscience.getImageList())}\n\n`);
+  botcastscience.imageHarvester.registerNewImageCallback(() => {
+    res.write(`data: ${JSON.stringify(botcastscience.imageHarvester.getImageList())}\n\n`);
   });
   //const intervalId = setInterval(() => {
   //  const message = { data: 'Hello from the server!' };
@@ -68,6 +64,17 @@ app.get('/events', (req, res) => {
     res.end();
   });
 });
+
+app.get('/imglist', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(botcastscience.imageHarvester.getImageList()));
+});
+
+
+
+
+
+
 
 //Lancement du serveur web pour l'interface
 app.listen(PORT, () => {
