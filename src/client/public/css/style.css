@@ -133,4 +133,5 @@
 .NavBar span{
   display: inline-block;
   user-select: none;
+  font-weight: bolder;
 }
