@@ -1,4 +1,4 @@
-## TOTO
+## TODO
 
 * Gérer les scanimages multiple
 * Gérer le mode "remote"
