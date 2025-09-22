@@ -11,6 +11,7 @@
   --thumbnail-size: 10vh;
   --thumbnail-margin:2vh;
   --navbar-width: 5vw;
+  --navbar-zone-width: 5vw;
 }
 
 .config{
@@ -118,16 +119,20 @@
 
 }
 #PrevNavBar {
-  left: calc(1px - 5vw);
+  background-clip: content-box;
+  left: calc( -1 * var(--navbar-width));
+  padding-right: var(--navbar-zone-width) ;
 }
 #PrevNavBar:hover {
   left: 0;
 }
 #NextNavBar {
-  left: calc(100vw - 2px);
+  background-clip: content-box;
+  left: calc(100vw - var(--navbar-zone-width));
+  padding-left: var(--navbar-zone-width) ;
 }
 #NextNavBar:hover {
-  left: calc(100vw - 5vw);
+  left: calc(100vw - var(--navbar-width) - var(--navbar-zone-width));
 }
 
 .NavBar span{

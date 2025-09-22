@@ -2,13 +2,16 @@
 /* eslint-disable no-undef */
 import Body from './Body.jsx';
 import { PrevNavBar, NextNavBar } from './NavBar.jsx';
+const baseUrl = "http://localhost:8000/"
 
 const app = document.getElementById('app');
+
 const App = () => {
   const [imglist, setimglist] = React.useState([]);
   const [imgCursor, setimgCursor] = React.useState(3);
   const [error, setError] = React.useState(0);
-  const url = 'http://localhost:8000/events';
+  const url = baseUrl+CHANNEL_ID;
+  console.log("url",url+'/events');
   const keyDownHandler = React.useCallback(
     (e) => {
       if (e.key === 'ArrowRight') {
@@ -35,22 +38,27 @@ const App = () => {
     };
   }, [imgCursor]);
 
-  React.useEffect(() => {
- //   console.log('Modif de la liste ', imglist);
-    setimgCursor(Math.max(0, imglist.length - 1));
-  }, [imglist]);
+  //React.useEffect(() => {
+  //  setimgCursor(Math.max(0, imglist.length - 1));
+  //}, [imglist]);
 
-//  React.useEffect(() => {
-//    console.log('Modif du Curseur', imgCursor);
-//  }, [imgCursor]);
-
+  
   React.useEffect(() => {
-    const eventSource = new EventSource(url);
+    
+    const eventSource = new EventSource(url+'/events');
 
     // Handle incoming data
     eventSource.onmessage = (event) => {
-      const newData = JSON.parse(event.data);
-      setimglist(newData);
+      console.log('data received',event.data);
+      var newData = JSON.parse(event.data);
+      console.log('data received',newData);
+      if(newData.type=="imagelist") {
+        setimgCursor(newData.cursor)
+        setimglist(newData.data);
+      }
+      if(newData.type=="cursor") {
+        setimgCursor(newData.data)
+      }
     };
 
     // Handle errors
@@ -63,15 +71,52 @@ const App = () => {
     return () => eventSource.close();
   }, [url]);
 
+  // Send a cursor update to server 
+  const sendUpdateCursor = async (val) => {
+    if(imglist.length>0) {
+      console.log("Update cursor on server");
+      const options =  {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cursor: imgCursor
+        }),
+      }
+      console.log("Envoi du curseur");
+      const reponse = await fetch(url+'/updatecursor/',options)
+      console.log(reponse);
+    }
+  }
+
+  // Send an update to server each time the cursor change
+  const updateServerCursor = React.useEffect(() =>{
+    sendUpdateCursor(imgCursor)
+  },[imgCursor])
+
+  // Update the cursor, but only if the new value is different for the old one
+  const updateCursor = React.useCallback((newval) => {
+    console.log(imgCursor+'/'+newval);
+    if(imgCursor!=newval){
+      setimgCursor(newval)
+      console.log('nouveau curseur',imgCursor)
+    } else {
+      console.log('curseur inchangé')
+    }
+  }, [imgCursor]);
+
+
   const handleNextImg = React.useCallback(() => {
-    // imglist est indexé à l'envers
+    // /!\ imglist est indexé à l'envers
     const new_val = Math.min(imgCursor + 1, imglist.length - 1);
     setimgCursor(new_val);
     console.log(imgCursor);
   }, [imgCursor]);
 
   const handlePrevImg = React.useCallback(() => {
-    // imglist est indexé à l'envers()
+    // /!\ imglist est indexé à l'envers()
     const new_val = Math.max(imgCursor - 1, 0);
     setimgCursor(new_val);
     console.log(imgCursor);
@@ -86,8 +131,9 @@ const App = () => {
     return <h4>Rien à afficher</h4>;
   } else {
     return (
-      <div id>
+      <div >
         <HeaderContainer />
+        {imgCursor}
         <Body imglist={imglist} imgCursor={imgCursor} />
         <PrevNavBar
           eventcb={() => {
@@ -142,4 +188,7 @@ const LogContainer = ({ handlePrevImg, handleNextImg, handleLog }) => {
 };
 
 const root = ReactDOM.createRoot(app);
-root.render(<App />);
+root.render(
+    <App ></App>
+);
+

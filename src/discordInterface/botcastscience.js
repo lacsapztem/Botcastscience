@@ -16,26 +16,33 @@ const scanImgCallback = (ChannelId) => {
   imageHarvester.launchImageScanner(ChannelId,client);
 }
 
-const startBot  = (ChannelId) => {
+const scanImgStopCallback = (ChannelId) => {
+  imageHarvester.stopImageScanner(ChannelId,client);
+}
+
+const startBot  = () => {
+  console.log(`Starting the Bot`);
   client.once(Events.ClientReady, (readyClient) => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-    
     commandManager(client,{
       scanImg : scanImgCallback,
+      scanImgStop:scanImgStopCallback,
     });
+  imageHarvester.launchImageScanner("397711811778052099",client)
   });
-
   // Log in to Discord with your client's token
   client.login(token);
 }
 
 const botcastscience = {
   imageHarvester: {
-    countAttachment: imageHarvester.countAttachment,
-    getImageList: imageHarvester.getImageList,
-    registerNewImageCallback: imageHarvester.registerNewImageCallback,
+    countAttachment: imageHarvester.countAttachment,  // a ChannelId as parameter 
+    getImageList: imageHarvester.getImageList,        // a ChannelId as parameter
+    registerNewImageCallback: imageHarvester.registerNewImageCallback, 
+    getCurrentCursor: imageHarvester.getCurrentCursor,
+    setCurrentCursor: imageHarvester.setCurrentCursor,
   },
-  startBot
+  startBot // No parameter
 };
 
 export default botcastscience;
