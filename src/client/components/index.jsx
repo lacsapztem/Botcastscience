@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import Body from './Body.jsx';
 import { PrevNavBar, NextNavBar } from './NavBar.jsx';
-const baseUrl = "http://localhost:8000/"
+import useSSE from './useSSE.jsx';
 
 const app = document.getElementById('app');
 
@@ -42,33 +42,24 @@ const App = () => {
   //  setimgCursor(Math.max(0, imglist.length - 1));
   //}, [imglist]);
 
-  
-  React.useEffect(() => {
-    
-    const eventSource = new EventSource(url+'/events');
-
-    // Handle incoming data
-    eventSource.onmessage = (event) => {
-      console.log('data received',event.data);
-      var newData = JSON.parse(event.data);
-      console.log('data received',newData);
-      if(newData.type=="imagelist") {
+  const processNewData = (newdata) => {
+    if(newData.type=="imagelist") {
         setimgCursor(newData.cursor)
         setimglist(newData.data);
       }
       if(newData.type=="cursor") {
         setimgCursor(newData.data)
       }
-    };
+  }
 
-    // Handle errors
-    eventSource.onerror = () => {
-      setError('Connection lost. Trying to reconnect...');
-      eventSource.close();
-    };
+  const updateError = (msg) =>{
+    setError(msg);
+  }
 
-    // Cleanup when component unmounts
-    return () => eventSource.close();
+
+  React.useEffect(() => {
+    
+    useSSE(processNewData,updateError);
   }, [url]);
 
   // Send a cursor update to server 
