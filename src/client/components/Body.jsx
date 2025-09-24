@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
-const Body = ({ imglist, imgCursor }) => {
+const Body = ({ imglist, imgCursor,fnUpdateCursor }) => {
   return (
     <div>
       <ImgContainer imglist={imglist} imgCursor={imgCursor} />
-      <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} />
+      <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} fnUpdateCursor={fnUpdateCursor} />
     </div>
   );
 };
@@ -17,7 +17,7 @@ const ImgContainer = ({ imglist, imgCursor }) => {
   );
 };
 
-const ThumbnailListContainer = ({ imglist, imgCursor }) => {
+const ThumbnailListContainer = ({ imglist, imgCursor,fnUpdateCursor }) => {
   return (
     <div>
       <div id="thumbnailListContainer">
@@ -27,16 +27,18 @@ const ThumbnailListContainer = ({ imglist, imgCursor }) => {
             url={minimg.url}
             classes={imgCursor == idx ? 'thumbnailContainer selectedThumbnailContainer' : 'thumbnailContainer'}
             offset={idx-imgCursor}
+            idx={idx}
+            fnUpdateCursor={fnUpdateCursor}
           />
         ))}
       </div>
     </div>
   );
 };
-const ThumbnailContainer = ({ url, classes, offset }) => {
+const ThumbnailContainer = ({ url, classes, offset,idx,fnUpdateCursor }) => {
   const style = { '--offset': offset };
   return (
-    <div className={classes} style={style}>
+    <div className={classes} style={style} onClick={()=>{fnUpdateCursor(idx)}}>
       <img src={url}></img>
     </div>
   );

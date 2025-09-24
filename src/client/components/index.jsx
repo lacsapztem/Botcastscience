@@ -97,11 +97,7 @@ const App = () => {
     }
   }
 
-  // Send an update to server each time the cursor change
-  const updateServerCursor = (val) =>{
-    sendUpdateCursor(val)
-  }
-
+/*
   // Update the cursor, but only if the new value is different for the old one
   const updateCursor = React.useCallback((newval) => {
     console.log(imgCursor+'/'+newval);
@@ -112,20 +108,16 @@ const App = () => {
       console.log('curseur inchangé')
     }
   }, [imgCursor]);
-
+*/
 
   const handleNextImg = React.useCallback(() => {
-    // /!\ imglist est indexé à l'envers
     const new_val = Math.min(imgCursor + 1, imglist.length - 1);
-    //setimgCursor(new_val);
     sendUpdateCursor(new_val);
     console.log(imgCursor);
   }, [imgCursor]);
 
   const handlePrevImg = React.useCallback(() => {
-    // /!\ imglist est indexé à l'envers()
     const new_val = Math.max(imgCursor - 1, 0);
-    //setimgCursor(new_val);
     sendUpdateCursor(new_val);
     console.log(imgCursor);
   }, [imgCursor]);
@@ -141,7 +133,7 @@ const App = () => {
     return (
       <div >
         <HeaderContainer />
-        <Body imglist={imglist} imgCursor={imgCursor} />
+        <Body imglist={imglist} imgCursor={imgCursor} fnUpdateCursor={sendUpdateCursor} />
         <PrevNavBar
           eventcb={() => {
             handlePrevImg();
