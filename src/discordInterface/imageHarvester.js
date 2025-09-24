@@ -62,10 +62,6 @@ const getCurrentCursor = (ChannelId) => {
 
 
 const setCurrentCursor = (ChannelId,value) => {
-  console.log('ChannelId',ChannelId)
-  console.log('value',value)
-  console.log('ChannelList',ChannelList)
-  console.log('ChannelList[ChannelId]',ChannelList[ChannelId])
   return ChannelList[ChannelId].cursor= value;
 }
 

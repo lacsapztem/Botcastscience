@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 
 app.get('/channel/:channelId/', (req, res) => {
   const ChannelId = req.params.channelId;
-  console.log("Serving channelId ",ChannelId);
+  //console.log("Serving channelId ",ChannelId);
   res.render('index', {ChannelId : ChannelId});
 });
 
@@ -58,12 +58,12 @@ app.post('/:channelId/updatecursor/', (req, res) => {
   try {
     const cursor = req.body.cursor;
     const ChannelId = req.params.channelId;
-    console.log("update Cursor for channelId "+ChannelId,cursor);
+    //console.log("update Cursor for channelId "+ChannelId,cursor);
     botcastscience.imageHarvester.setCurrentCursor(ChannelId,cursor);
     if(clientCallbacks[ChannelId]) {
       const tmptab=clientCallbacks[ChannelId].clients;
       for (const clt in tmptab) { 
-        console.log('envoi d un curseur',clt)
+        //console.log('envoi d un curseur',clt)
         tmptab[clt].udpateCursor(cursor); 
       }
     }
@@ -117,9 +117,6 @@ app.get('/:channelId/events', (req, res) => {
         res.write(`data: ${JSON.stringify(data)}\n\n`);
       }
   });
-  const tmpfonc = ()=>{
-    console.log('toto')
-  }
 
   //const timer=setInterval(tmpfonc,1000)
   //déclare une callback qui sera lancé a chaque mise à à jour de la liste d'image

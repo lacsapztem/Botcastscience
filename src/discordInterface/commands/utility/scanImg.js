@@ -8,7 +8,7 @@ const baseUrl = proto + '://' + server + port
 const scanImg = {
 	data: new SlashCommandBuilder()
 		.setName('scanimage')
-		.setDescription("Lance un robot qui permet d'afficher les image d'un channel sur une page web")
+		.setDescription("Lance un robot qui permet d'afficher les images d'un channel sur une page web")
     .setDefaultMemberPermissions(0),
 	async execute(interaction,callbacks) {
 		// interaction.user is the object representing the User who ran the command
