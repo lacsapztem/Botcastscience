@@ -8,7 +8,8 @@ const baseUrl = proto + '://' + server + port
 const scanImgStop = {
 	data: new SlashCommandBuilder()
 		.setName('stopscanimage')
-		.setDescription("Arrete un scanimage"),
+		.setDescription("Arrete un scanimage")
+    .setDefaultMemberPermissions(0),
 	async execute(interaction,callbacks) {
 		// interaction.user is the object representing the User who ran the command
 		// interaction.member is the GuildMember object, which represents the user in the specific guild

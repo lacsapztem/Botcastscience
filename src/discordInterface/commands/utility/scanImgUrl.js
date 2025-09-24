@@ -8,7 +8,8 @@ const baseUrl = proto + '://' + server + port
 const scanImgUrl = {
 	data: new SlashCommandBuilder()
 		.setName('imageurl')
-		.setDescription("permet de récuperer l'url d'une scanimage en cours"),
+		.setDescription("permet de récuperer l'url d'une scanimage en cours")
+    .setDefaultMemberPermissions(0),
 	async execute(interaction,callbacks) {
 		// interaction.user is the object representing the User who ran the command
 		// interaction.member is the GuildMember object, which represents the user in the specific guild
