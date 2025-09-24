@@ -77,19 +77,22 @@ app.post('/:channelId/updatecursor/', (req, res) => {
 });
 
 app.get('/:channelId/events', (req, res) => {
-  console.log('start events');
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
 
 
-  const id = crypto.randomBytes(16).toString("hex");
+  const id = req.params.clientId || crypto.randomBytes(16).toString("hex");
+
+  console.log(id + ' : start events',req.params);
+
   const ChannelId = req.params.channelId;
 
   const dataInit = {
     type : 'imagelist',
     data : botcastscience.imageHarvester.getImageList(ChannelId),
-    cursor : botcastscience.imageHarvester.getCurrentCursor(ChannelId)
+    cursor : botcastscience.imageHarvester.getCurrentCursor(ChannelId),
+    id : id
   }
 
   //envoi la liste des images existentes
@@ -107,7 +110,8 @@ app.get('/:channelId/events', (req, res) => {
     udpateCursor : (newCursor) => {
         const data = {
           type : 'cursor',
-          data : newCursor
+          data : newCursor,
+          id : id
         }
         console.log("sending cursor " + newCursor + " to " + id);
         res.write(`data: ${JSON.stringify(data)}\n\n`);

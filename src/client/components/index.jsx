@@ -5,12 +5,16 @@ import { PrevNavBar, NextNavBar } from './NavBar.jsx';
 import useSSE from './useSSE.jsx';
 
 const app = document.getElementById('app');
+var clientID;
+const baseUrl = "http://localhost:8000/"
+const url = baseUrl+CHANNEL_ID;
+
+useSSE.init(url)
 
 const App = () => {
   const [imglist, setimglist] = React.useState([]);
   const [imgCursor, setimgCursor] = React.useState(3);
   const [error, setError] = React.useState(0);
-  const url = baseUrl+CHANNEL_ID;
   console.log("url",url+'/events');
   const keyDownHandler = React.useCallback(
     (e) => {
@@ -42,12 +46,16 @@ const App = () => {
   //  setimgCursor(Math.max(0, imglist.length - 1));
   //}, [imglist]);
 
-  const processNewData = (newdata) => {
+  const processNewData = (newData) => {
     if(newData.type=="imagelist") {
+        clientID = clientID || newData.id
+        console.log("reception d'un imagelist");
         setimgCursor(newData.cursor)
         setimglist(newData.data);
       }
       if(newData.type=="cursor") {
+        console.log("reception d'un curseur");
+        
         setimgCursor(newData.data)
       }
   }
@@ -56,11 +64,18 @@ const App = () => {
     setError(msg);
   }
 
+  const reconnectionCallback = ()=>{
+    setTimeout(()=>{
+      useSSE.init(url)
+    },5000);
+    return 0;
+  }
 
-  React.useEffect(() => {
-    
-    useSSE(processNewData,updateError);
-  }, [url]);
+  const connectionToServer = () => {
+    useSSE.registerCallback(processNewData,updateError,reconnectionCallback);
+  }
+
+  connectionToServer();
 
   // Send a cursor update to server 
   const sendUpdateCursor = async (val) => {
@@ -73,7 +88,7 @@ const App = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          cursor: imgCursor
+          cursor: val
         }),
       }
       console.log("Envoi du curseur");
@@ -83,9 +98,9 @@ const App = () => {
   }
 
   // Send an update to server each time the cursor change
-  const updateServerCursor = React.useEffect(() =>{
-    sendUpdateCursor(imgCursor)
-  },[imgCursor])
+  const updateServerCursor = (val) =>{
+    sendUpdateCursor(val)
+  }
 
   // Update the cursor, but only if the new value is different for the old one
   const updateCursor = React.useCallback((newval) => {
@@ -102,14 +117,16 @@ const App = () => {
   const handleNextImg = React.useCallback(() => {
     // /!\ imglist est indexé à l'envers
     const new_val = Math.min(imgCursor + 1, imglist.length - 1);
-    setimgCursor(new_val);
+    //setimgCursor(new_val);
+    sendUpdateCursor(new_val);
     console.log(imgCursor);
   }, [imgCursor]);
 
   const handlePrevImg = React.useCallback(() => {
     // /!\ imglist est indexé à l'envers()
     const new_val = Math.max(imgCursor - 1, 0);
-    setimgCursor(new_val);
+    //setimgCursor(new_val);
+    sendUpdateCursor(new_val);
     console.log(imgCursor);
   }, [imgCursor]);
 
@@ -124,7 +141,6 @@ const App = () => {
     return (
       <div >
         <HeaderContainer />
-        {imgCursor}
         <Body imglist={imglist} imgCursor={imgCursor} />
         <PrevNavBar
           eventcb={() => {

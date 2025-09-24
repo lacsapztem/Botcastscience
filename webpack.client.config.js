@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 const config = {
   entry: './src/client/components/index.jsx',
   output: {
-    filename: 'bundle.js',
+    filename: 'botcastscience.js',
     publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
   },

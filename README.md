@@ -1,7 +1,6 @@
 ## TODO
 
-* Gérer les scanimages multiple => à vérifier
 * Limiter le scanimage au groupe podcasteur
 * commande dispo par serveur
-* image en double en cas de nouvelle image? Scanimage multiple ?
-* implementer des tentatives de reconnexion
+* implementer des tentatives de reconnexion   => in progress ca se reconnect mais fetch pending (timeout ?, https://stackoverflow.com/questions/46946380/fetch-api-request-timeout)
+* changement du curseur si on clique sur une miniature

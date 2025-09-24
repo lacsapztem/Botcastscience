@@ -28,7 +28,8 @@ const startBot  = () => {
       scanImg : scanImgCallback,
       scanImgStop:scanImgStopCallback,
     });
-  imageHarvester.launchImageScanner("397711811778052099",client)
+  // Lancement auto du channel de test pour faciliter le dev --- a commenter avant mise en prod
+    imageHarvester.launchImageScanner("397711811778052099",client)
   });
   // Log in to Discord with your client's token
   client.login(token);
