@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 
 app.get('/channel/:channelId/', (req, res) => {
   const ChannelId = req.params.channelId;
-  //console.log("Serving channelId ",ChannelId);
+  console.log("Serving channelId ",ChannelId);
   res.render('index', {ChannelId : ChannelId});
 });
 
