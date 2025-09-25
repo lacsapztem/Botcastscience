@@ -2,7 +2,7 @@ import {  Collection, Events, MessageFlags } from 'discord.js';
 
 
 import scanImg from './commands/utility/scanImg.js';
-import biere from './commands/utility/biere.js';
+import tchin from './commands/utility/tchin.js';
 import scanImgUrl from './commands/utility/scanImgUrl.js';
 import scanImgStop from './commands/utility/scanImgStop.js';
 
@@ -14,7 +14,7 @@ const commandManager = (client,callbacks) => {
   client.commands.set(scanImg.data.name, scanImg);
   client.commands.set(scanImgUrl.data.name, scanImgUrl);
   client.commands.set(scanImgStop.data.name, scanImgStop);
-  client.commands.set(biere.data.name, biere);
+  client.commands.set(tchin.data.name, tchin);
 
   client.on(Events.InteractionCreate, interaction => {
     if (!interaction.isChatInputCommand()) return;

@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import Body from './Body.jsx';
 import { PrevNavBar, NextNavBar } from './NavBar.jsx';
-import useSSE from './useSSE.jsx';
+import useSSE from './utils/useSSE.jsx';
 
 const app = document.getElementById('app');
 var clientID;
@@ -133,7 +133,13 @@ const App = () => {
     return (
       <div >
         <HeaderContainer />
-        <Body imglist={imglist} imgCursor={imgCursor} fnUpdateCursor={sendUpdateCursor} />
+        <Body 
+          imglist={imglist} 
+          imgCursor={imgCursor} 
+          fnUpdateCursor={sendUpdateCursor} 
+          handlePrevImg={handlePrevImg} 
+          handleNextImg={handleNextImg}
+        />
         <PrevNavBar
           eventcb={() => {
             handlePrevImg();

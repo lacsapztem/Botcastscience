@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
+import initSwipe from "./utils/swipe.jsx";
 
-const Body = ({ imglist, imgCursor,fnUpdateCursor }) => {
+const Body = ({ imglist, imgCursor,fnUpdateCursor,handlePrevImg,handleNextImg }) => {
   return (
     <div>
-      <ImgContainer imglist={imglist} imgCursor={imgCursor} />
+      <ImgContainer imglist={imglist} imgCursor={imgCursor} handlePrevImg={handlePrevImg} handleNextImg={handleNextImg}/>
       <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} fnUpdateCursor={fnUpdateCursor} />
     </div>
   );
 };
 
-const ImgContainer = ({ imglist, imgCursor }) => {
+const ImgContainer = ({ imglist, imgCursor ,handlePrevImg,handleNextImg}) => {
+  const swipeCBS = initSwipe(handlePrevImg,handleNextImg);
   return (
     <div id="imgContainer">
-      <img src={imglist[imgCursor].url}></img>
+      <img src={imglist[imgCursor].url} onTouchStart={swipeCBS.onTouchStart} onTouchMove={swipeCBS.onTouchMove} onTouchEnd={swipeCBS.onTouchEnd} ></img>
     </div>
   );
 };
