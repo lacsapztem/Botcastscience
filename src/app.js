@@ -148,7 +148,7 @@ app.get('/:channelId/imglist', (req, res) => {
 
 
 //Lancement du serveur web pour l'interface
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
