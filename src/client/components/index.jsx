@@ -15,6 +15,8 @@ const App = () => {
   const [imglist, setimglist] = React.useState([]);
   const [imgCursor, setimgCursor] = React.useState(3);
   const [error, setError] = React.useState(0);
+  const [isFullScreen, setIsFullScreen] = React.useState(true);
+  
   console.log("url",url+'/events');
   const keyDownHandler = React.useCallback(
     (e) => {
@@ -97,18 +99,6 @@ const App = () => {
     }
   }
 
-/*
-  // Update the cursor, but only if the new value is different for the old one
-  const updateCursor = React.useCallback((newval) => {
-    console.log(imgCursor+'/'+newval);
-    if(imgCursor!=newval){
-      setimgCursor(newval)
-      console.log('nouveau curseur',imgCursor)
-    } else {
-      console.log('curseur inchangé')
-    }
-  }, [imgCursor]);
-*/
 
   const handleNextImg = React.useCallback(() => {
     const new_val = Math.min(imgCursor + 1, imglist.length - 1);
@@ -126,19 +116,26 @@ const App = () => {
     console.log('LogOnDemand: imglist', imglist);
   }, [imgCursor]);
 
+  const toggleFullsceen =  React.useCallback(() => {
+    setIsFullScreen(!isFullScreen)
+  }, [isFullScreen]);
+
+
   if (imglist.length == 0) {
     console.log("pas d'image");
     return <h4>Rien à afficher</h4>;
   } else {
     return (
       <div >
-        <HeaderContainer />
+        <HeaderContainer isFullScreen={isFullScreen}/>
         <Body 
           imglist={imglist} 
           imgCursor={imgCursor} 
           fnUpdateCursor={sendUpdateCursor} 
           handlePrevImg={handlePrevImg} 
           handleNextImg={handleNextImg}
+          isFullScreen={isFullScreen}
+          toggleFullsceen={toggleFullsceen}
         />
         <PrevNavBar
           eventcb={() => {
@@ -157,23 +154,35 @@ const App = () => {
           handlePrevImg={handlePrevImg}
           handleNextImg={handleNextImg}
           handleLog={handleLog}
+          isFullScreen={isFullScreen}
         />
       </div>
     );
   }
 };
 
-const HeaderContainer = () => {
+const HeaderContainer = (isFullScreen) => {
+  var classHidden=""
+  if(isFullScreen)
+  {
+    classHidden="hiddenInFullScreen"
+  }
   return (
-    <div id="headerContainer">
+    <div id="headerContainer"  className={classHidden}>
       <h1>Bot&apos;Cast Science</h1>
     </div>
   );
 };
 
-const FooterContainer = ({ imglist, imgCursor, error, handlePrevImg, handleNextImg, handleLog }) => {
+const FooterContainer = ({ imglist, imgCursor, error, handlePrevImg, handleNextImg, handleLog,isFullScreen }) => {
+  var classHidden=""
+  if(isFullScreen)
+  {
+    classHidden="hiddenInFullScreen"
+  }
+  
   return (
-    <div id="footerContainer">
+    <div id="footerContainer" className={classHidden}>
       <h4>
         {imglist.length - imgCursor}/{imglist.length}:{imglist[imgCursor].id} - {error}
       </h4>

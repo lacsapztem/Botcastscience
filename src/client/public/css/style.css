@@ -14,6 +14,16 @@
   --navbar-zone-width: 5vw;
 }
 
+.hiddenInFullScreen {
+  display: none;
+}
+
+.classFullScreen {
+  --header-height:0;
+  --spacer-height:0;
+  --imgContainer-height:100vh;
+  --imgContainer-width:100vw;
+}
 .config{
   user-select: none;
   overflow: hidden;
@@ -116,7 +126,6 @@
   text-align: center;
   font-size: 5vw;
   align-content: center;
-
 }
 #PrevNavBar {
   background-clip: content-box;

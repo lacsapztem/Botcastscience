@@ -1,27 +1,37 @@
 /* eslint-disable react/prop-types */
 import initSwipe from "./utils/swipe.jsx";
 
-const Body = ({ imglist, imgCursor,fnUpdateCursor,handlePrevImg,handleNextImg }) => {
+const Body = ({ imglist, imgCursor,fnUpdateCursor,handlePrevImg,handleNextImg,isFullScreen }) => {
   return (
     <div>
-      <ImgContainer imglist={imglist} imgCursor={imgCursor} handlePrevImg={handlePrevImg} handleNextImg={handleNextImg}/>
-      <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} fnUpdateCursor={fnUpdateCursor} />
+      <ImgContainer imglist={imglist} imgCursor={imgCursor} handlePrevImg={handlePrevImg} handleNextImg={handleNextImg} isFullScreen={isFullScreen}/>
+      <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} fnUpdateCursor={fnUpdateCursor} isFullScreen={isFullScreen}/>
     </div>
   );
 };
 
-const ImgContainer = ({ imglist, imgCursor ,handlePrevImg,handleNextImg}) => {
+const ImgContainer = ({ imglist, imgCursor ,handlePrevImg,handleNextImg,isFullScreen,toggleFullsceen}) => {
   const swipeCBS = initSwipe(handlePrevImg,handleNextImg);
+  var classFullScreen=""
+  if(isFullScreen)
+  {
+    classFullScreen="classFullScreen"
+  }
   return (
-    <div id="imgContainer">
-      <img src={imglist[imgCursor].url} onTouchStart={swipeCBS.onTouchStart} onTouchMove={swipeCBS.onTouchMove} onTouchEnd={swipeCBS.onTouchEnd} ></img>
+    <div id="imgContainer" className={classFullScreen}>
+      <img src={imglist[imgCursor].url} onTouchStart={swipeCBS.onTouchStart} onTouchMove={swipeCBS.onTouchMove} onTouchEnd={swipeCBS.onTouchEnd} onDoubleClick={toggleFullsceen} ></img>
     </div>
   );
 };
 
-const ThumbnailListContainer = ({ imglist, imgCursor,fnUpdateCursor }) => {
+const ThumbnailListContainer = ({ imglist, imgCursor,fnUpdateCursor,isFullScreen }) => {
+  var classHidden=""
+  if(isFullScreen)
+  {
+    classHidden="hiddenInFullScreen"
+  }
   return (
-    <div>
+    <div className={classHidden}>
       <div id="thumbnailListContainer">
         {imglist.map((minimg, idx) => (
           <ThumbnailContainer
