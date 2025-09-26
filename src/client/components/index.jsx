@@ -6,8 +6,8 @@ import useSSE from './utils/useSSE.jsx';
 
 const app = document.getElementById('app');
 var clientID;
-const baseUrl = "http://localhost:8000/"
-const url = baseUrl+CHANNEL_ID;
+const baseUrl = SERVER_URL
+const url = baseUrl+'/'+CHANNEL_ID;
 
 useSSE.init(url)
 

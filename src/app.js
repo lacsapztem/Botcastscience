@@ -13,6 +13,11 @@ const PORT = process.env.PORT ?? 8000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const proto = process.env.PROTO || "http";
+const server = process.env.SERVER || "localhost";
+const baseUrl = proto + '://' + server + '/''
+
+
 dotenv.config();
 console.log('Let"s start the bot');
 botcastscience.startBot();
@@ -30,6 +35,7 @@ const compiler = webpack(config);
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import { log } from 'console';
+import { Server } from 'http';
 
 app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
@@ -51,7 +57,7 @@ app.get('/', (req, res) => {
 app.get('/channel/:channelId/', (req, res) => {
   const ChannelId = req.params.channelId;
   console.log("Serving channelId ",ChannelId);
-  res.render('index', {ChannelId : ChannelId});
+  res.render('index', {ChannelId : ChannelId,ServerUrl: baseUrl});
 });
 
 app.post('/:channelId/updatecursor/', (req, res) => {
