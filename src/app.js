@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const proto = process.env.PROTO || "http";
-const server = process.env.SERVER || "localhost";
+const server = process.env.SERVER_ADDRESS || "localhost";
 const baseUrl = proto + '://' + server + '/'
 
 

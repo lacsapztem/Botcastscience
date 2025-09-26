@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
 import 'dotenv/config.js';
 const proto = process.env.PROTO || "http";
-const server = process.env.SERVER || "localhost";
+const server = process.env.SERVER_ADDRESS || "localhost";
 const port = process.env.PORT ? ':' + process.env.PORT : "";
 const baseUrl = proto + '://' + server + port
 
