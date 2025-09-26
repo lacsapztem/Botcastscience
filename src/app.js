@@ -18,8 +18,11 @@ const server = process.env.SERVER_ADDRESS || "localhost";
 const baseUrl = proto + '://' + server + '/'
 
 
+
 dotenv.config();
 console.log('Let"s start the bot');
+console.log("BaseUrl",baseUrl);
+
 botcastscience.startBot();
 const app = express();
 
