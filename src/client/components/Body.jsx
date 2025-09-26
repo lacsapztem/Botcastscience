@@ -1,25 +1,25 @@
 /* eslint-disable react/prop-types */
 import initSwipe from "./utils/swipe.jsx";
 
-const Body = ({ imglist, imgCursor,fnUpdateCursor,handlePrevImg,handleNextImg,isFullScreen }) => {
+const Body = ({ imglist, imgCursor,fnUpdateCursor,handlePrevImg,handleNextImg,isFullScreen,handleFullScreen }) => {
   return (
     <div>
-      <ImgContainer imglist={imglist} imgCursor={imgCursor} handlePrevImg={handlePrevImg} handleNextImg={handleNextImg} isFullScreen={isFullScreen}/>
+      <ImgContainer imglist={imglist} imgCursor={imgCursor} handlePrevImg={handlePrevImg} handleNextImg={handleNextImg} isFullScreen={isFullScreen} handleFullScreen={handleFullScreen}/>
       <ThumbnailListContainer imglist={imglist} imgCursor={imgCursor} fnUpdateCursor={fnUpdateCursor} isFullScreen={isFullScreen}/>
     </div>
   );
 };
 
-const ImgContainer = ({ imglist, imgCursor ,handlePrevImg,handleNextImg,isFullScreen,toggleFullsceen}) => {
-  const swipeCBS = initSwipe(handlePrevImg,handleNextImg);
+const ImgContainer = ({ imglist, imgCursor ,handlePrevImg,handleNextImg,isFullScreen,handleFullScreen}) => {
+  const swipeCBS = initSwipe(handlePrevImg,handleNextImg,handleFullScreen);
   var classFullScreen=""
   if(isFullScreen)
   {
     classFullScreen="classFullScreen"
   }
   return (
-    <div id="imgContainer" className={classFullScreen}>
-      <img src={imglist[imgCursor].url} onTouchStart={swipeCBS.onTouchStart} onTouchMove={swipeCBS.onTouchMove} onTouchEnd={swipeCBS.onTouchEnd} onDoubleClick={toggleFullsceen} ></img>
+    <div id="imgContainer" className={classFullScreen} >
+      <img src={imglist[imgCursor].url} onTouchStart={swipeCBS.onTouchStart} onTouchMove={swipeCBS.onTouchMove} onTouchEnd={swipeCBS.onTouchEnd} ></img>
     </div>
   );
 };

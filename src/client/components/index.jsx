@@ -117,7 +117,14 @@ const App = () => {
   }, [imgCursor]);
 
   const toggleFullsceen =  React.useCallback(() => {
+    console.log("toggle fullscreen");
+    
     setIsFullScreen(!isFullScreen)
+  }, [isFullScreen]);
+
+  const handleFullScreen =  React.useCallback((val) => {
+    console.log("toggle fullscreen",val);
+    setIsFullScreen(val);
   }, [isFullScreen]);
 
 
@@ -126,7 +133,7 @@ const App = () => {
     return <h4>Rien à afficher</h4>;
   } else {
     return (
-      <div >
+      <div onDoubleClick={toggleFullsceen}>
         <HeaderContainer isFullScreen={isFullScreen}/>
         <Body 
           imglist={imglist} 
@@ -135,7 +142,7 @@ const App = () => {
           handlePrevImg={handlePrevImg} 
           handleNextImg={handleNextImg}
           isFullScreen={isFullScreen}
-          toggleFullsceen={toggleFullsceen}
+          handleFullScreen={handleFullScreen}
         />
         <PrevNavBar
           eventcb={() => {
