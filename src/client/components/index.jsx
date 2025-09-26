@@ -15,7 +15,7 @@ const App = () => {
   const [imglist, setimglist] = React.useState([]);
   const [imgCursor, setimgCursor] = React.useState(3);
   const [error, setError] = React.useState(0);
-  const [isFullScreen, setIsFullScreen] = React.useState(true);
+  const [isFullScreen, setIsFullScreen] = React.useState(false);
   
   console.log("url",url+'/events');
   const keyDownHandler = React.useCallback(
@@ -168,10 +168,9 @@ const App = () => {
   }
 };
 
-const HeaderContainer = (isFullScreen) => {
+const HeaderContainer = ({isFullScreen}) => {
   var classHidden=""
-  if(isFullScreen)
-  {
+  if(isFullScreen==true){
     classHidden="hiddenInFullScreen"
   }
   return (

@@ -4,12 +4,12 @@ const token = process.env.DISCORD_TOKEN;
 const servers = process.env.DISCORD_SERVERS.split(",");
 const clientId = process.env.APP_ID;
 import scanImg from './utility/scanImg.js';
-import biere from './utility/biere.js';
+import tchin from './utility/tchin.js';
 import scanImgUrl from './utility/scanImgUrl.js';
 import scanImgStop from './utility/scanImgStop.js';
 const commands = [];
 commands.push(scanImg.data.toJSON());
-commands.push(biere.data.toJSON());
+commands.push(tchin.data.toJSON());
 commands.push(scanImgUrl.data.toJSON());
 commands.push(scanImgStop.data.toJSON());
 
