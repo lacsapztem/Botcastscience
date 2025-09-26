@@ -15,7 +15,7 @@ const __dirname = dirname(__filename);
 
 const proto = process.env.PROTO || "http";
 const server = process.env.SERVER || "localhost";
-const baseUrl = proto + '://' + server + '/''
+const baseUrl = proto + '://' + server + '/'
 
 
 dotenv.config();
