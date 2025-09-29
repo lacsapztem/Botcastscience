@@ -28,7 +28,9 @@ const getImageAttachment = (message) => {
     if (file.contentType && file.contentType.startsWith('image/')) ChannelList[message.channelId].ImageList.push(file);
   });
   const nbImg=ChannelList[message.channelId].ImageList.length;
-  setCurrentCursor(message.channelId, nbImg-1);
+  if(ChannelList[message.channelId].updateOnNewVal){
+    setCurrentCursor(message.channelId, nbImg-1);
+  }
   NewImageCallback()
 }
 
@@ -36,12 +38,13 @@ const getImageAttachment = (message) => {
 const filterAttachementMsg = (message) => message.attachments.size > 0;
 
 
-const initChannel = (channel) => {
-  //console.log(channel);
+const initChannel = (channel,updateOnNewVal) => {
+  console.log(channel);
   channel.messages.fetch({ limit: 100 }).then(parseMessageList);
   ChannelList[channel.id]={
     ImageList : [],
     Collector : channel.createMessageCollector({ filterAttachementMsg, Max: 1 }),
+    updateOnNewVal: updateOnNewVal,
     cursor: 0,
   }
   ChannelList[channel.id].Collector.on('collect', getImageAttachment);
@@ -82,11 +85,13 @@ const getImageList = (ChannelId) => {
   
 }
 
-const launchImageScanner = (ChannelId,client) => {
+const launchImageScanner = (ChannelId,client,updateOnNewVal) => {
   if(!ChannelList[ChannelId]) {
     client.channels.fetch(ChannelId)
-      .then(initChannel)
+      .then((Chan)=>{initChannel(Chan,updateOnNewVal)})
       .catch(console.error);
+  } else {
+    ChannelList[ChannelId].updateOnNewVal = updateOnNewVal
   }
 };
 

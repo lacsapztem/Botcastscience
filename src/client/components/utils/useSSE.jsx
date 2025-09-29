@@ -13,9 +13,9 @@ const init= (url) => {
   eventSource.onmessage = (event) => {
     //recoTries reinit because if we are here, we are reconnected
     recoTries=0;
-    console.log('data received',event.data);
+    //console.log('data received',event.data);
     var newData = JSON.parse(event.data);
-    console.log('data received',newData);
+    //console.log('data received',newData);
     newdataCallback(newData);  
   };
   // Handle errors

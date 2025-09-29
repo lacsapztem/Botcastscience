@@ -17,7 +17,7 @@ const App = () => {
   const [error, setError] = React.useState(0);
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   
-  console.log("url",url+'/events');
+  //console.log("url",url+'/events');
   const keyDownHandler = React.useCallback(
     (e) => {
       if (e.key === 'ArrowRight') {
@@ -51,12 +51,12 @@ const App = () => {
   const processNewData = (newData) => {
     if(newData.type=="imagelist") {
         clientID = clientID || newData.id
-        console.log("reception d'un imagelist");
+        //console.log("reception d'un imagelist");
         setimgCursor(newData.cursor)
         setimglist(newData.data);
       }
       if(newData.type=="cursor") {
-        console.log("reception d'un curseur");
+        //console.log("reception d'un curseur");
         
         setimgCursor(newData.data)
       }
@@ -82,7 +82,7 @@ const App = () => {
   // Send a cursor update to server 
   const sendUpdateCursor = async (val) => {
     if(imglist.length>0) {
-      console.log("Update cursor on server");
+      //console.log("Update cursor on server");
       const options =  {
         method: 'POST',
         headers: {
@@ -93,9 +93,9 @@ const App = () => {
           cursor: val
         }),
       }
-      console.log("Envoi du curseur");
+      //console.log("Envoi du curseur");
       const reponse = await fetch(url+'/updatecursor/',options)
-      console.log(reponse);
+      //console.log(reponse);
     }
   }
 
@@ -103,13 +103,13 @@ const App = () => {
   const handleNextImg = React.useCallback(() => {
     const new_val = Math.min(imgCursor + 1, imglist.length - 1);
     sendUpdateCursor(new_val);
-    console.log(imgCursor);
+    //console.log(imgCursor);
   }, [imgCursor]);
 
   const handlePrevImg = React.useCallback(() => {
     const new_val = Math.max(imgCursor - 1, 0);
     sendUpdateCursor(new_val);
-    console.log(imgCursor);
+    //console.log(imgCursor);
   }, [imgCursor]);
 
   const handleLog = React.useCallback(() => {
@@ -117,19 +117,19 @@ const App = () => {
   }, [imgCursor]);
 
   const toggleFullsceen =  React.useCallback(() => {
-    console.log("toggle fullscreen");
+    //console.log("toggle fullscreen");
     
     setIsFullScreen(!isFullScreen)
   }, [isFullScreen]);
 
   const handleFullScreen =  React.useCallback((val) => {
-    console.log("toggle fullscreen",val);
+    //console.log("toggle fullscreen",val);
     setIsFullScreen(val);
   }, [isFullScreen]);
 
 
   if (imglist.length == 0) {
-    console.log("pas d'image");
+    //console.log("pas d'image");
     return <h4>Rien à afficher</h4>;
   } else {
     return (

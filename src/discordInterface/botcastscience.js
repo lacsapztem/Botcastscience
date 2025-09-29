@@ -12,8 +12,8 @@ const token = process.env.DISCORD_TOKEN;
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 
-const scanImgCallback = (ChannelId) => {
-  imageHarvester.launchImageScanner(ChannelId,client);
+const scanImgCallback = (ChannelId,updateOnNewVal) => {
+  imageHarvester.launchImageScanner(ChannelId,client,updateOnNewVal);
 }
 
 const scanImgStopCallback = (ChannelId) => {
