@@ -5,8 +5,9 @@ Son but premier est de collecter les images postées dans un channel Discord et 
 Certaine fonctionnalités ont été rajoutées afin de permettre une utilisation pour diffuser les illustrations pendant les radios-dessinées
 D'autres fonctionnalités comme une commande issue de l'ancienne chatroom n'ont d'autres raisons d'etre que l'exploration des API discord et la nostalgie
 
+## Diffusion des images
 
-### Les coammandes
+### Les commandes
 
 La diffusion d'image est lancée en lançant la commande `/scanimage` depuis un channel discord. Un booleen est demandé en parametre pour définir si l'image affichée est mise à jour quand une nouvelle image arrive ou si celle ci est juste ajoutée à la suite
 En retour, le bot confirme le lancement du scan et indique l'URL où se trouve la page diffusant les images
