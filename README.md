@@ -1,48 +1,49 @@
 # Botcastscience
 
-Botcastscience est un serveur permettant de communiquer avec le discord de Podcast Science
-Son but premier est de collecter les images postées dans un channel Discord et la diffuser sur une page Web suscpetible d'etre diffusée pendant les live Youtube via OBS
-Certaine fonctionnalités ont été rajoutées afin de permettre une utilisation pour diffuser les illustrations pendant les radios-dessinées
-D'autres fonctionnalités comme une commande issue de l'ancienne chatroom n'ont d'autres raisons d'etre que l'exploration des API discord et la nostalgie
+Botcastscience est un serveur permettant de communiquer avec le Discord de Podcast Science.  
+Son but premier est de collecter les images postées dans un channel Discord et de les diffuser sur une page web susceptible d’être affichée pendant les lives YouTube via OBS.  
+Certaines fonctionnalités ont été ajoutées afin de permettre une utilisation pour diffuser les illustrations pendant les radios-dessinées.  
+D’autres fonctionnalités, comme une commande issue de l’ancienne chatroom, n’ont d’autre raison d’être que l’exploration des API Discord et la nostalgie.
 
 ## Diffusion des images
 
 ### Les commandes
 
-La diffusion d'image est lancée en lançant la commande `/scanimage` depuis un channel discord. Un booleen est demandé en parametre pour définir si l'image affichée est mise à jour quand une nouvelle image arrive ou si celle ci est juste ajoutée à la suite
-En retour, le bot confirme le lancement du scan et indique l'URL où se trouve la page diffusant les images
-Si l'on veut modifier le comportement en cas de nouvelle image, il suffit de relancer la commande
-Plusieurs channels peuvent etre scannés simultanement, dans ce cas, chacun aura sa propre page de diffusion
+La diffusion d’images est lancée avec la commande `/scanimage` depuis un channel Discord.  
+Un booléen est demandé en paramètre pour définir si l’image affichée doit être mise à jour lorsqu’une nouvelle image arrive, ou si celle-ci est simplement ajoutée à la suite.  
 
-La commande `/stopscanimage` permet d'arreter le scan du channel où la commande est appelé
+En retour, le bot confirme le lancement du scan et indique l’URL où se trouve la page diffusant les images.  
+Si l’on veut modifier le comportement en cas de nouvelle image, il suffit de relancer la commande.  
+Plusieurs channels peuvent être scannés simultanément : dans ce cas, chacun aura sa propre page de diffusion.  
 
-La commande `/imageurl` permet de récuperer l'URL de la page de diffusion pour un channel en cours de scan
+La commande `/stopscanimage` permet d’arrêter le scan du channel où la commande est appelée.  
 
+La commande `/imageurl` permet de récupérer l’URL de la page de diffusion pour un channel en cours de scan.  
 
 ### La page de diffusion
 
-La page de diffusion affiché est divisée en 2 parties :
-* L'image en cours de visualisation
-* Une barre permettant de prévisualiser les images suivantes et précédente
-Il est possible de se déplacer dans la liste d'image avec les flèches droite et gauche
-La flèche vers le bas affiche des infos de débug dans la console du navigateur
+La page de diffusion affichée est divisée en 2 parties :  
+* L’image en cours de visualisation  
+* Une barre permettant de prévisualiser les images suivantes et précédentes  
 
-Il est aussi possible de naviger avec des barres/boutons lattérale ne s'affichant que si le curseur se déplace vers le bord de la fenetre
+Il est possible de se déplacer dans la liste d’images avec les flèches droite et gauche.  
+La flèche vers le bas affiche des informations de debug dans la console du navigateur.  
 
-La navigation via le swipe est possible en swipant vers les la droite et la gauche
-Il est également possible en passer l'image en plein écran en swipant vers le haut et repasser en mode normal en swipant vers le bas
+Il est aussi possible de naviguer avec des barres/boutons latéraux, qui ne s’affichent que si le curseur se déplace vers le bord de la fenêtre.  
 
-Il est possible d'ouvrir plusieurs pages en parallele. Dans ce cas, chaque page affichera la meme image et la navigation dans une page se refletera sur les autres, permettant ainsi un mode "télécommande"
+La navigation via le swipe est possible vers la droite et la gauche.  
+Il est également possible de passer l’image en plein écran en swipant vers le haut, et de revenir en mode normal en swipant vers le bas.  
 
+Il est possible d’ouvrir plusieurs pages en parallèle. Dans ce cas, chaque page affichera la même image, et la navigation dans une page se reflétera sur les autres, permettant ainsi un mode “télécommande”.  
 
 ## Divers
 
-La commande `/tchin` permet permet de trinquer avec un autre utilisateur du discord
+La commande `/tchin` permet de trinquer avec un autre utilisateur du Discord.  
 
 ## TODO
 
-* Limiter le scanimage au groupe podcasteur => Admin fait
-* gestion d'une demande de changement de curseur au serveur avant le changement (prevoir ackno des client avant auorisation du changement suivant, quid des clients qui ne réponde pas) => remplacer par une ou des files d'atteente
-* Commenter + doc
-* possibilité de bloquer les changements en in et en out (et de les rattraper)
-* un fichier de conf avec les boissons
+* Limiter le `scanimage` au groupe podcasteurs → fait (admin)  
+* Gestion d’une demande de changement de curseur au serveur avant le changement (prévoir un ackno des clients avant l’autorisation du changement suivant ; quid des clients qui ne répondent pas) → remplacer par une ou plusieurs files d’attente  
+* Commenter + documenter  
+* Possibilité de bloquer les changements en entrée et en sortie (et de les rattraper)  
+* Un fichier de configuration avec les boissons  
