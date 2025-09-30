@@ -40,6 +40,25 @@ Il est possible d’ouvrir plusieurs pages en parallèle. Dans ce cas, chaque pa
 
 La commande `/tchin` permet de trinquer avec un autre utilisateur du Discord.  
 
+## Structure du projet
+
+L'ensemble du code se trouve dans le dossier `src/` et se trouve découpée en 2 parties principales :
+- le client dont le code se trouve intégralement dans le dossier `src/client/`
+- le serveur dont le code se compose de tout les fichiers ne se trouvant pas dans le repertoire client
+
+### Partie Serveur
+
+* Le point d'entrée du serveur est le fichier `srv/app.js`, il lance le serveur express et gère le routage de celui-ci.
+Par ailleurs, ce fichier instancie également la partie "serveur" du bot via la commande `botcastscience.startBot();`
+les routes utiles sont sont les suivantes :
+ - `/channel/:channelId/` : Permet d'accéder au client d'afficher les images d'un channel
+ - `/:channelId/updatecursor/` : Est appelé par le client quand celui-ci souhaite mettre à jour le curseur indiquant l'image à afficher
+ - `/:channelId/imglist` : Permet au client de télécharger un JSON contenant les images disponiple pour un Channel
+ - `/:channelId/events` : Permet au client d'initier et maintenir une connection qui permettra au serveur d'envoyer des informations au client 
+
+
+### Partie Client
+
 ## TODO
 
 * Limiter le `scanimage` au groupe podcasteurs → fait (admin)  
@@ -47,3 +66,4 @@ La commande `/tchin` permet de trinquer avec un autre utilisateur du Discord.
 * Commenter + documenter  
 * Possibilité de bloquer les changements en entrée et en sortie (et de les rattraper)  
 * Un fichier de configuration avec les boissons  
+* Securiser l'accés aux route "events" et "updatecursor"
