@@ -50,11 +50,11 @@ L'ensemble du code se trouve dans le dossier `src/` et se trouve découpée en 2
 
 * Le point d'entrée du serveur est le fichier `srv/app.js`, il lance le serveur express et gère le routage de celui-ci.
 Par ailleurs, ce fichier instancie également la partie "serveur" du bot via la commande `botcastscience.startBot();`
-les routes utiles sont sont les suivantes :
- - `/channel/:channelId/` : Permet d'accéder au client d'afficher les images d'un channel
- - `/:channelId/updatecursor/` : Est appelé par le client quand celui-ci souhaite mettre à jour le curseur indiquant l'image à afficher
- - `/:channelId/imglist` : Permet au client de télécharger un JSON contenant les images disponiple pour un Channel
- - `/:channelId/events` : Permet au client d'initier et maintenir une connection qui permettra au serveur d'envoyer des informations au client 
+Les routes utiles sont les suivantes :
+   - `/channel/:channelId/` : Permet d'accéder au client d'afficher les images d'un channel
+   - `/:channelId/updatecursor/` : Est appelé par le client quand celui-ci souhaite mettre à jour le curseur indiquant l'image à afficher
+   - `/:channelId/imglist` : Permet au client de télécharger un JSON contenant les images disponiple pour un Channel
+   - `/:channelId/events` : Permet au client d'initier et maintenir une connection qui permettra au serveur d'envoyer des informations au client 
 
 
 ### Partie Client
