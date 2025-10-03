@@ -92,7 +92,7 @@ La configuration se fait via des variables d'environnements :
   - DISCORD_TOKEN
   - PUBLIC_KEY
 * Variables permettant de définir les channels et les serveur
-  - DISCORD_CHANNEL : channel pour lesquel le scan est lancé automatiquement (existe surtout le dev)
+  - DISCORD_CHANNEL : channel pour lesquel le scan est lancé automatiquement (existe surtout pour le dev)
   - DISCORD_SERVERS
 
 
