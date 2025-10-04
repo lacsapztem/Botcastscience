@@ -7,7 +7,12 @@ var recoTries=0;
 const init= (url) => {
   console.log("connexion en cours...");
   
-  const eventSource = new EventSource(url+'/events');
+  const eventSource = new EventSource({
+    url: url+'/events',
+    headers: {
+      'X-Accel-Buffering': 'no'
+    }
+  });
 
   // Handle incoming data
   eventSource.onmessage = (event) => {
