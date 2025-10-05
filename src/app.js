@@ -20,7 +20,7 @@ const baseUrl = proto + '://' + server + '/'
 
 
 dotenv.config();
-console.log('Let"s start the bot, guy');
+console.log('Let"s start the bot');
 console.log("BaseUrl",baseUrl);
 
 botcastscience.startBot();
