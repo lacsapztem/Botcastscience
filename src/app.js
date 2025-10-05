@@ -20,7 +20,7 @@ const baseUrl = proto + '://' + server + '/'
 
 
 dotenv.config();
-console.log('Let"s start the bot');
+console.log('Let"s start the bot, guy');
 console.log("BaseUrl",baseUrl);
 
 botcastscience.startBot();
@@ -38,7 +38,6 @@ const compiler = webpack(config);
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import { log } from 'console';
-import { Server } from 'http';
 
 app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
