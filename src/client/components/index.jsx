@@ -10,7 +10,7 @@ const baseUrl = SERVER_URL
 const url = baseUrl+CHANNEL_ID;
 
 useSSE.init(url)
-
+console.log("tot")
 const App = () => {
   const [imglist, setimglist] = React.useState([]);
   const [imgCursor, setimgCursor] = React.useState(3);
